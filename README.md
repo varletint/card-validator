@@ -46,7 +46,7 @@ You must have **Node.js** (v16+ recommended).
 
 ## Endpoint Documentation
 
-### \`POST /api/validate\`
+### \`POST /api/validate-card\`
 
 Validates a card number payload.
 
