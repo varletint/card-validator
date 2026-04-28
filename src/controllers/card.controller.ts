@@ -1,9 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { validateCardNumber } from "../services/card.service.js";
-import {
-  ValidateCardRequest,
-  ValidateCardResponse,
-} from "../types/card.types.js";
+import { ValidateCardResponse } from "../types/card.types.js";
+import { cardValidationSchema } from "../schemas/card.schema.js";
+import { badRequest } from "../utils/AppError.js";
 
 export function validateCard(
   req: Request,
@@ -11,15 +10,13 @@ export function validateCard(
   next: NextFunction
 ): void {
   try {
-    const { cardNumber } = req.body as ValidateCardRequest;
+    const parsed = cardValidationSchema.safeParse(req.body);
 
-    if (!cardNumber || typeof cardNumber !== "string") {
-      res.status(400).json({
-        valid: false,
-        message: "cardNumber is required and must be a string",
-      });
-      return;
+    if (!parsed.success) {
+      throw badRequest(parsed.error.issues[0].message);
     }
+
+    const { cardNumber } = parsed.data;
 
     const valid = validateCardNumber(cardNumber);
 
