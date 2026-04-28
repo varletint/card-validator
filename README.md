@@ -37,7 +37,7 @@ You must have **Node.js** (v16+ recommended).
 
 ### Scripts
 
-- **Start in Dev Mode**: \`npm run dev\` (Uses \`ts-node\` and loads \`src/server.ts\`)
+- **Start in Dev Mode**: \`npm run dev\`
 - **Build**: \`npm run build\` (Compiles to \`dist/\`)
 - **Start in Prod**: \`npm start\` (Requires \`npm run build\` to be executed first)
 - **Run Tests**: \`npm test\`
